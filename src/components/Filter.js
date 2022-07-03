@@ -42,16 +42,16 @@ const FilterContainer = styled.div`
 
 function Filter({ filters, genres, years, onInputChange, onCheck }) {
   const [filterVisible, setFilterVisible] = React.useState(false);
-
+  const [datos, setDatos] = useState([])
   const [categories, setCategories] = useState([]);
   const uniqCategories=[]
 
   useEffect(() => {
-    const datos = apiFetch("categories").then(JSON.stringify).then(console.log)
-    console.log(datos)
-    console.log("")
-    console.log(datos.map((x)=>x.name))
+    apiFetch("categories").then((res) => {
+      setDatos(res.map((x)=>x.name));
+      console.log(datos)});
 
+    console.log(datos)
   //a.then((b)=>b.map((x)=>x.name))
 
   }, []);
@@ -66,8 +66,7 @@ function Filter({ filters, genres, years, onInputChange, onCheck }) {
         <RiFilterFill />
       </StyledButton>
       <FilterContainer isVisible={filterVisible}>
-        <CheckBoxGroup title="Genre" checkboxes={uniqCategories} onCheck={(value) => onCheck("genres", value)} />
-        <CheckBoxGroup title="Release year" checkboxes={["Year2", "Title", "Score"]} onCheck={(value) => onCheck("years", value)} />
+        <CheckBoxGroup title="Genre" checkboxes={datos} onCheck={(value) => onCheck("genres", value)} />
         <Text>Score</Text>
         <VoteContainer>
 

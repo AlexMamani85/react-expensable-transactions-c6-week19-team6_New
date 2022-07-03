@@ -24,7 +24,8 @@ function CheckBoxGroup({ title, checkboxes, onCheck }) {
       <CheckboxesContainer>
         {checkboxes.map((checkbox) => (
           <Checkbox 
-            key={checkbox.name} 
+            key={checkbox}
+            name={checkbox} 
             {...checkbox} 
             onChange={handleCheckedChange}
           />
