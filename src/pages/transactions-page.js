@@ -1,16 +1,12 @@
 import styled from "@emotion/styled";
-import { format, getMonth, getYear } from "date-fns";
-import Categories from "../components/Categories/categories";
-import Filter from "../components/Filter";
-import MonthPicker from "../components/MonthPicker";
-import { Heading, Text } from "../components/Typography";
-import { typography } from "../styles";
-import { Link, useLocation, useParams } from "react-router-dom";
+
+
+import FilterForTransactions from "../components/Filter-for-transactions";
+import { Heading } from "../components/Typography";
+import {  useLocation, useParams } from "react-router-dom";
+import CategoriesForTransactions from "../components/Categories/categories-for-transactions"
 import { useLocalStorage, useSearchParamsWithLocal } from "../hooks";
-import Select from "../components/Select";
-
-
-const sortBy = ["Year", "Title", "Score"];
+import { getMonth, getYear } from "date-fns";
 
 const Container = styled.div`
   display: flex;
@@ -19,37 +15,35 @@ const Container = styled.div`
 `;
 
 
-const Title = styled.h1`
-  ${typography.head.sm}
-  font-weight: 600;
-`;
-
-const initialDate = {
-  year: getYear(new Date()),
-  month: getMonth(new Date()),
-};
 
 function TransactionsPage() {
   let params = useParams();
   let location = useLocation();
 
-  const [searchParams, setSearchParams] = useSearchParamsWithLocal(
-    initialDate,
-    "expensable_date"
-  );
 
-
-
-
-
+  const initialDate = {
+    year: getYear(new Date()),
+    month: getMonth(new Date()),
+  };  
+  
+  const [searchParams, setSearchParams] = useSearchParamsWithLocal(initialDate,"expensable_date");
+  
+    const date = {
+      year: +searchParams.get("year"),
+      month: +searchParams.get("month"),
+    };
 
   return (
     <Container>
     <Heading css={{ textAlign: "center" }}>Transactions</Heading>
-    <Filter
+    <FilterForTransactions
 
-    />
-    <Select defaultValue="Sort by" options={sortBy}  />
+      />
+
+                    <CategoriesForTransactions date={date} ></CategoriesForTransactions>
+
+    <p></p>
+      
 
     {/* {status === "pending" ? <Text>Loding movies</Text> : null}
     {status === "success"
