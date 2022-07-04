@@ -24,5 +24,5 @@ export const CategoryAmount = styled.div`
   gap: 0.25rem;
   ${typography.head.sm}
   font-weight: 600;
-  color: ${colors.gray[900]};
-`;
+  color: ${({ color }) => color};
+  `;

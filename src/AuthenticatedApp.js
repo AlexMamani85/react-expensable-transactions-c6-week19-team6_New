@@ -3,6 +3,7 @@ import { colors } from "./styles";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import CategoriesPage from "./pages/categories-page";
+import TransactionsPage from "./pages/transactions-page";
 
 const Container = styled.div`
   display: grid;
@@ -24,7 +25,7 @@ function AuthenticatedApp() {
           <Route index element={<Navigate to="categories" />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/categories/:type" element={<CategoriesPage />} />
-          <Route path="/transactions" element={<h1>Transactions</h1>} />
+          <Route path="/transactions" element={<TransactionsPage />} />
           <Route path="/budgets" element={<h1>Budgets</h1>} />
         </Routes>
       </MainContainer>
